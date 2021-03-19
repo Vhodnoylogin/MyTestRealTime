@@ -20,17 +20,17 @@ public class Loop {
         int diff = max - min + 1;
         try {
             loop.loop((delta, cycle) -> {
-//                long iit = it.get();
+                long iit = it.get();
                 long time = System.nanoTime();
                 int randInt = rand.nextInt(diff) + min;
                 String out = ""
-//                        (iit++) + "\n"
-//                                + (iit * delta) + " : " + (time - startTime) / 1000000 + "\n"
+                        + (iit++) + "\n"
+                        + (iit * delta) + " : " + (time - startTime) / 1000000 + "\n"
                         + randInt + "\n"
-//                                + "\n"
+                        + "\n"
                         ;
                 System.out.println(out);
-//                it.set(iit);
+                it.set(iit);
                 if (randInt % 7 == 0) {
                     cycle.stop();
                 }
@@ -48,7 +48,7 @@ public class Loop {
         }
     }
 
-    public class StopLoop {
+    public static class StopLoop {
         protected Loop cycle;
         protected boolean stopFlag = false;
 
