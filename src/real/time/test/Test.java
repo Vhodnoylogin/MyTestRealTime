@@ -7,15 +7,15 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiConsumer;
 
 public class Test {
-    protected BiConsumer<Long, Loop.StopLoop> action;
+    protected BiConsumer<Double, Loop.StopLoop> action;
 
     {
         long startTime = System.nanoTime();
         AtomicLong it = new AtomicLong(0L);
         Random rand = new Random();
 
-        int min = 10;
-        int max = 20;
+        int min = 100;
+        int max = 200;
         int diff = max - min + 1;
 
         this.action = (delta, cycle) -> {
@@ -24,18 +24,18 @@ public class Test {
             int randInt = rand.nextInt(diff) + min;
             String out = ""
                     + (iit++) + "\n"
-                    + (iit * delta) + " : " + (time - startTime) / 1000000 + "\n"
+                    + (iit * delta) + " : " + (time - startTime) / 1000000000.0 + "\n"
                     + randInt + "\n"
                     + "\n";
             System.out.println(out);
             it.set(iit);
-            if (randInt % 7 == 0) {
+            if (randInt % 7 == 0 && iit > 100) {
                 cycle.stop();
             }
         };
     }
 
-    public BiConsumer<Long, Loop.StopLoop> getAction() {
+    public BiConsumer<Double, Loop.StopLoop> getAction() {
         return action;
     }
 }

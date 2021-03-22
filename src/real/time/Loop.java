@@ -7,13 +7,11 @@ public class Loop {
     protected Integer delta = 30;
     protected StopLoop stop = new StopLoop(this);
 
-
-
-    public void loop(BiConsumer<Long, StopLoop> actions) throws InterruptedException {
-        long delta = 1000 / this.delta;
+    public void loop(BiConsumer<Double, StopLoop> actions) throws InterruptedException {
+        Double delta = 1000.0 / this.delta;
         while (!this.stop.stopLoop()) {
-            actions.accept(delta, this.stop);
-            TimeUnit.MILLISECONDS.sleep(delta);
+            actions.accept(delta / 1000, this.stop);
+            TimeUnit.MILLISECONDS.sleep(delta.longValue());
         }
     }
 
